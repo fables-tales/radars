@@ -13,6 +13,11 @@ pub struct ScanGroup {
     addrs: Vec<SocketAddr>
 }
 
+fn report_progress() {
+    print!(".");
+    io::stdout().flush().unwrap();
+}
+
 impl ScanGroup {
     pub fn new(addrs: Vec<SocketAddr>) -> ScanGroup {
         ScanGroup {
@@ -31,8 +36,4 @@ impl ScanGroup {
         }).map(|addr| addr.port()).collect()
     }
 
-    fn report_progress() {
-        print!(".");
-        io::stdout().flush().unwrap();
-    }
 }

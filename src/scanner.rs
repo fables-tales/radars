@@ -1,4 +1,4 @@
-use std::net::{IpAddr, SocketAddr, ToSocketAddrs};
+use std::net::{IpAddr, SocketAddr};
 use std::ops::Range;
 use std::thread::{self, JoinHandle};
 
@@ -57,7 +57,7 @@ impl Scanner {
 
     fn socket_addrs(&self) -> Vec<SocketAddr> {
         ports().into_iter().map(|port_number| {
-            (self.target, port_number).to_socket_addrs().unwrap().next().unwrap()
+            SocketAddr::new(self.target, port_number)
         }).collect()
     }
 }

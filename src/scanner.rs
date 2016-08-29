@@ -45,9 +45,12 @@ impl Scanner {
         let results: Vec<_> = await_results(handles);
 
         for result in results {
-            let open_ports = result.unwrap();
-            for open_port in open_ports {
-                println!("{} is open", open_port);
+            let open_ports = result;
+            match open_ports {
+                Ok(x) => for open_port in x {
+                    println!("{} is open", open_port);
+                },
+                Err(_) => println!("Error: joining a thread failed"),
             }
         }
     }
